@@ -75,7 +75,7 @@ public class SecurityController {
     /* Addition for separate log out page */
     @RequestMapping("/logoutconfirm")
     public String logoutconfirm(){
-        return "logoutconfirm";
+        return "login";
     }
 
 

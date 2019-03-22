@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8"/>
     <title>Title</title>
+    <th:block th:replace="~{base :: header}"></th:block>
+
 </head>
 <body>
+    <!-- Nav Bar -->
+    <div th:replace="base :: nav"></div>
+
+    <!-- Main Content -->
+    h1: "people i'm following"
+    container:
+        user pic
+        username
+        user full name
+
+
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- JS Links -->
+    <div th:replace="base :: jslinks"></div>
 
 </body>
 </html>
