@@ -16,6 +16,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Image</th>
                     <th>Posted By</th>
                     <!-- Add a picture of the person here-->
                     <th>Posted Date</th>
@@ -26,7 +27,9 @@
                 <tr th:each="message : ${messages}">
                     <td th:text="${message.title}"></td>
                     <td>
-                        <img th:src="${message.messagePic == null}?'':${message.messagePic}" />
+                        <img th:src="${message.messagePic == null}?'':${message.messagePic}" style="height: auto; width: auto"  />
+                    </td>
+                    <td>
                         <span th:text="${message.postedBy}"></span>
                     </td>
                     <td th:text="${message.postedDate}"></td>
@@ -36,7 +39,7 @@
                         <!-- Only the user that made the post can update -->
                         <span th:if="${user_id == message.user.id}">
                             <a class="btn btn-warning" th:href="@{/update/{id}(id=${message.id})}">Update</a>
-                            <a class="btn btn-dangerous" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                            <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
                         </span>
                     </td>
                 </tr>

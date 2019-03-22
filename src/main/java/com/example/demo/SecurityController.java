@@ -38,14 +38,31 @@ public class SecurityController {
             model.addAttribute("message", "User Account Created");
         }
         // where should it go after a successful registration?
-        return "redirect:/";
+        return "redirect:/login";
     }
 
+
+
+    /* ATTN Dave or Melisssa -- 
+    *
+    * Right now when I log in, I am logged in but it first immeidately takes me to
+    * path "/style.css"
+    *
+    * You have to refirectly manually to
+    * path "/"
+    * and it will work fine.
+    * */
+    /* Do I need get and post separately for log in? */
     @RequestMapping("/login")
     public String login(Model model){
-        model.addAttribute("user");
-        return "redirect:/";
+        return "login";
     }
+//    @PostMapping("/login")
+//    public String login(@ModelAttribute("user") User user, Model model){
+//        model.addAttribute("user", user);
+//        return "redirect:/";
+//    }
+
 
     /* taken from:
      * https://www.baeldung.com/get-user-in-spring-security */
