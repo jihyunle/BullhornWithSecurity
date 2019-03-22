@@ -44,7 +44,7 @@ public class SecurityController {
     @RequestMapping("/login")
     public String login(Model model){
         model.addAttribute("user");
-        return "login";
+        return "redirect:/";
     }
 
     /* taken from:
