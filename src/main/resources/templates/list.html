@@ -32,9 +32,13 @@
                         <img th:src="${message.messagePic == null}?'':${message.messagePic}" />
                     </td>
                     <td>
-                        <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                        <!-- Anyone can see Details -->
                         <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
-                        <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                        <!-- Only the user that made the post can update -->
+                        <span th:if="${user.id == message.user.id}">
+                            <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                            <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                        </span>
                     </td>
                 </tr>
             </tbody>
