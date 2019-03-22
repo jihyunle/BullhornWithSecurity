@@ -11,11 +11,9 @@
     <!-- Nav Bar -->
     <div th:replace="base :: nav"></div>
 
-    <div class="container-fluid">
+    <div class="container-fluid padding text-center">
         <h2 th:text="${myuser.firstName}"></h2> <h2 th:text="${myuser.lastName}"></h2>
-        <p></p>
-
-        <a class="btn btn-success" th:href="@{#}">Follow</a>
+        <p><a class="btn btn-success" th:href="@{#}">Follow</a></p>
 
         <!-- Card: username and email on separate line on top, pic on bottom -->
         <div class="card" style="width: 18rem;">
