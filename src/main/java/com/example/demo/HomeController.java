@@ -56,7 +56,6 @@ public class HomeController {
                 e.printStackTrace();
             }
         }
-
         // add and save date
         Date date = new Date();
         try {
@@ -64,7 +63,6 @@ public class HomeController {
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         message.setPostedDate(date);
 
@@ -93,4 +91,5 @@ public class HomeController {
         messageRepository.deleteById(id);
         return "redirect:/";
     }
+
 }
