@@ -1,0 +1,40 @@
+<!-- Message Details-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Message Details</title>
+    <th:block th:replace="~{base :: header}"></th:block>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+<body>
+
+    <div th:insert="~{base :: nav}"></div>
+
+    <div class="container-fluid">
+        <p><h3>Message Details</h3></p>
+        <div class="text-left">
+            <strong>Title :</strong><span th:text="${message.title}"></span><br />
+            <strong>Content :</strong><br /><span th:text="${message.content}"></span><br />
+            <strong>Posted Date :</strong><span th:text="${#dates.format(message.postedDate, 'MM-dd-YY')}"></span><br />
+            <strong>Posted By :</strong><span th:text="${message.postedBy}"></span><br />
+            <strong>Picture :</strong>
+                <img th:src="${message.messagePic}" alt="message pic" /><br />
+
+            <a th:href="@{/delete/{id}(id=${message.id})}">Delete this message</a><p></p>
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- JS Links -->
+    <div th:replace="base :: jslinks"></div>
+
+</body>
+</html>

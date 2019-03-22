@@ -1,0 +1,78 @@
+<!-- Post a New Message -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <title>New Message Form</title>
+    <th:block th:insert="base :: header"></th:block>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+<body>
+
+    <!-- Nav Bar -->
+    <div th:replace="base :: nav"></div>
+
+    <!-- Form -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Post a New Message</h3>
+
+                <form action="#"
+                      th:action="@{/process}"
+                      th:object="${message}"
+                      method="post"
+                      enctype="multipart/form-data">
+
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" th:field="*{title}"
+                               class="form-control" id="title" />
+                        <span th:if="${#fields.hasErrors('title')}"
+                              th:errors="*{title}"></span><br />
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <input type="text" th:field="*{content}"
+                               class="form-control" id="content" />
+                        <span th:if="${#fields.hasErrors('content')}"
+                              th:errors="*{content}"></span><br />
+                    </div>
+                    <div class="form-group">
+                        <label for="postedDate">Posted Date</label>
+                        <input type="date" th:field="*{postedDate}"
+                               class="form-control" id="postedDate" name="postedDate" />
+                        <span th:if="${#fields.hasErrors('postedDate')}"
+                              th:errors="*{postedDate}"></span><br />
+                    </div>
+                    <div class="form-group">
+                        <label for="postedBy">Posted By</label>
+                        <input type="text" th:field="*{postedBy}"
+                               class="form-control" id="postedBy" />
+                        <span th:if="${#fields.hasErrors('postedBy')}"
+                              th:errors="*{postedBy}"></span><br />
+                    </div>
+                    <div>
+                        Picture
+                        <input type="file" name="file"><br />
+                    </div>
+                    <!-- submit button -->
+                    <button type="submit" class="btn btn-primary my-1">Save</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- JS Links -->
+    <div th:replace="base :: jslinks"></div>
+
+</body>
+</html>

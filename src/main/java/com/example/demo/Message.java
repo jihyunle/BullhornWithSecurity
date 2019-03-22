@@ -31,9 +31,11 @@ public class Message {
 
     private String messagePic;
 
-    public Message(){
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    }
+    public Message(){ }
 
     public Message(@NotNull @Size(min = 3) String title, @NotNull @Size(min = 10) String content, @NotNull @Size(min = 2) String postedBy) {
         this.title = title;
@@ -87,6 +89,14 @@ public class Message {
 
     public void setMessagePic(String messagePic) {
         this.messagePic = messagePic;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

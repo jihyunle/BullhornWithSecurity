@@ -1,67 +1,99 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"-->
-      <!--xmlns:sec="www.thymeleaf.org/extras/spring-security">-->
-<!--<head>-->
-    <!--<meta charset="UTF-8"/>-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1" />-->
-    <!--<title>Title</title>-->
+<!-- Will be using base.html to unify the look of header and jumbotron-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Title</title>
+    <th:block th:fragment="header">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    </th:block>
+</head>
+<body>
+    <!-- Navigation -->
+    <div th:fragment="nav">
+        <nav class="navbar navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Bullhorn</a>
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <!-- isAuthenticated() means you're logged in -->
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="#">Welcome <span th:text="${#authentication.name}"></span></a>
+                        </li>
 
-    <!--<th:block th:fragment="header">-->
-        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
-              <!--integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />-->
-    <!--</th:block>-->
+                        <!-- Put this in a drop-down menu below 'Welcome'. See above line -->
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a href="nav-link" href="/myprofile">My Profile</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a href="nav-link" href="/followers">My Followers</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a href="nav-link" href="/following">People I Follow</a>
+                        </li>
 
-<!--</head>-->
-<!--<body>-->
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <!-- !isAuthenticated() means you're NOT logged in-->
+                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="!isAuthenticated()">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                            <a class="nav-link" href="/add">Add New Message</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <!--<li class="nav-item" sec:authorize="hasAuthority('ADMIN')">-->
+                        <!--<a class="nav-link" href="/addcategory">Add Category</a>-->
+                        <!--</li>-->
+                        <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
+                        <!--<a class="nav-link" href="/">View Cars</a>-->
+                        <!--</li>-->
+                        <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
+                        <!--<a class="nav-link" href="/category">View Categories</a>-->
+                        <!--</li>-->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-    <!--<div th:fragment="nav">-->
-        <!--<nav class="navbar navbar navbar-expand-lg navbar-dark bg-dark">-->
+    <!-- Footer -->
+    <footer class="footer fixed-bottom" th:fragment="footer">
+        <div class="container" style="text-align: center" >
+            <p>&copy; Copyright 2019</p>
+        </div>
+    </footer>
 
-            <!--&lt;!&ndash; Links &ndash;&gt;-->
-            <!--<ul class="navbar-nav">-->
-                <!--&lt;!&ndash; isAuthenticated() means you're logged in &ndash;&gt;-->
-                <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
-                    <!--<a class="nav-link" href="#">Welcome <span th:text="${#authentication.name}"></span></a>-->
-                <!--</li>-->
-                <!--<li class="nav-item">-->
-                    <!--<a class="nav-link" href="/">Home</a>-->
-                <!--</li>-->
-                <!--&lt;!&ndash; !isAuthenticated() means you're NOT logged in&ndash;&gt;-->
-                <!--<li class="nav-item" sec:authorize="!isAuthenticated()">-->
-                    <!--<a class="nav-link" href="/register">Register</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item" sec:authorize="!isAuthenticated()">-->
-                    <!--<a class="nav-link" href="/login">Login</a>-->
-                <!--</li>-->
-                <!--<li class="nav-item" sec:authorize="isAuthenticated()">-->
-                    <!--<a class="nav-link" href="/logout">Logout</a>-->
-                <!--</li>-->
-                <!--&lt;!&ndash; An example from a project using Course java bean &ndash;&gt;-->
-                <!--<li class="nav-item" sec:authorize="hasAuthority('ADMIN')">-->
-                    <!--<a class="nav-link" href="/add">Add Course</a>-->
-                <!--</li>-->
-            <!--</ul>-->
+    <!-- Javascript -->
+    <th:block th:fragment="jslinks">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        <!--</nav>-->
-    <!--</div>-->
+        <script>
+            //  Jquery for smooth scrolling
+            $('.nav-link, .navbar-brand, .new-button').click(function () {
+                var sectionTo = $(this).attr('href');
+                $('html, body').animate({
+                    scrollTop: $(sectionTo).offset().top
+                }, 1500);
+            });
+        </script>
 
+    </th:block>
 
-    <!--&lt;!&ndash; Footer &ndash;&gt;-->
-    <!--<footer class="footer fixed-bottom" th:fragment="footer">-->
-        <!--<div class="container" style="text-align: center" >-->
-            <!--<p>&copy; Copyright 2019</p>-->
-        <!--</div>-->
-    <!--</footer>-->
-
-    <!--&lt;!&ndash; Javascript &ndash;&gt;-->
-    <!--<th:block th:fragment="jslinks">-->
-        <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
-                <!--integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
-                <!--integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
-        <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"-->
-                <!--integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-    <!--</th:block>-->
-
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>

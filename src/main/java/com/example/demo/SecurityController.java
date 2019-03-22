@@ -16,12 +16,14 @@ public class SecurityController {
     @Autowired
     private UserService userService;
 
+    // GET
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
         model.addAttribute("user", new User());
         return "registration";
     }
 
+    // POST
     @PostMapping("/register")
     public String processRegistrationPage(@Valid
                                           @ModelAttribute("user") User user, BindingResult result,
@@ -34,7 +36,7 @@ public class SecurityController {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
-        return "index";
+        return "list";
     }
 
     /* taken from:
@@ -51,10 +53,10 @@ public class SecurityController {
 //        return principal.getName();
 //    }
 
-    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }
+//    @RequestMapping("/")
+//    public String index(){
+//        return "index";
+//    }
 
     @RequestMapping("/login")
     public String login(){
