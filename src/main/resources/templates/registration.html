@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="www.thymeleaf.org"
       xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Registration</title>
+    <title>Registration Page</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
+
     <div th:replace="base :: nav"></div>
 
     <div class="container">
@@ -63,7 +63,10 @@
         </form>
     </div>
 
+    <!-- Footer -->
     <div th:replace="base :: footer"></div>
+    <!-- JS Links -->
+    <div th:replace="base :: jslinks"></div>
 
 </body>
 </html>

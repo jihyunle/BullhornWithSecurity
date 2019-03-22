@@ -7,7 +7,6 @@ if authenticated, user is allowed to see the page -->
 <html lang="en" xmlns:th="www.thymeleaf.org"
       xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8"/>
     <title>Login Page</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
@@ -17,16 +16,14 @@ if authenticated, user is allowed to see the page -->
 
     <div class="container">
         <h1>Login Page</h1>
-
         <div th:if="${param.error}">    <!-- this displays an error msg if login details are incorrect-->
             Invalid username or password
         </div>
-
         <div th:if="${param.logout}">
             You have been logged out
         </div>
-
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}"
+              method="post">
             <div>
                 <label>User name: <input type="text" name="username" /></label>
             </div>
@@ -34,12 +31,16 @@ if authenticated, user is allowed to see the page -->
                 <label>Password: <input type="password" name="password" /></label>
             </div>
             <div>
-                <input type="submit" value="Sign in" />
+                <button type="submit" class="btn btn-primary my-1">Sign in</button>
             </div>
         </form>
     </div>
 
-<div th:replace="base :: footer"></div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- JS Links -->
+    <div th:replace="base :: jslinks"></div>
+
 
 </body>
 </html>
