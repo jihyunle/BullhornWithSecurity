@@ -22,14 +22,22 @@ public class HomeController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    private UserService userService;
+
     /* lists all message entries*/
     @RequestMapping("/")
     public String listMessage(Model model){
         model.addAttribute("messages", messageRepository.findAll());
+
+        // Remember to add this line to assign user!
+        if (userService.getUser() != null){
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
         return "list";
     }
 
-    /* allows user to post a new message*/
+    /* allows user to load form page*/
     @GetMapping("/add")
     public String messageForm(Model model){
         model.addAttribute("message", new Message());
@@ -46,8 +54,12 @@ public class HomeController {
         if (result.hasErrors()){
             return "form";  /* posts a new message if entry is valid*/
         }
+
+        // add user
+        model.addAttribute("user", userService.getUser());
+
         // add and save picture
-        if (! file.isEmpty()){
+        if (!file.isEmpty()){ // if file NOT empty
             try {
                 Map uploadResult = cloudc.upload(file.getBytes(),
                         ObjectUtils.asMap("resourcestype", "auto"));
@@ -56,16 +68,17 @@ public class HomeController {
                 e.printStackTrace();
             }
         }
+
         // add and save date
         Date date = new Date();
         try {
             date = new SimpleDateFormat("MM-dd-YY").parse(postedDate);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         message.setPostedDate(date);
 
+        message.setUser(userService.getUser());
         messageRepository.save(message);
         return "redirect:/";    /* redirects the user to main page if invalid*/
     }
@@ -82,6 +95,7 @@ public class HomeController {
     @RequestMapping("/update/{id}")
     public String updateMessage(@PathVariable("id") long id, Model model){
         model.addAttribute("message", messageRepository.findById(id).get());
+        model.addAttribute("user", userService.getUser());
         return "form";
     }
 

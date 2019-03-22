@@ -26,7 +26,8 @@ public class SecurityController {
     // POST
     @PostMapping("/register")
     public String processRegistrationPage(@Valid
-                                          @ModelAttribute("user") User user, BindingResult result,
+                                          @ModelAttribute("user") User user,
+                                          BindingResult result,
                                           Model model){
         model.addAttribute("user", user);
         if (result.hasErrors()){
@@ -36,7 +37,14 @@ public class SecurityController {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
-        return "list";
+        // where should it go after a successful registration?
+        return "redirect:/";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model model){
+        model.addAttribute("user");
+        return "login";
     }
 
     /* taken from:
@@ -51,32 +59,26 @@ public class SecurityController {
 //    public String currentUsernameSimple(HttpServletRequest request){
 //        Principal principal = request.getUserPrincipal();
 //        return principal.getName();
+
 //    }
 
-//    @RequestMapping("/")
-//    public String index(){
-//        return "index";
-//    }
 
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
-    }
 
-    @RequestMapping("/secure")
+
+    @RequestMapping("/myprofile")
     public String secure(Principal principal, Model model){
         User myuser = ((CustomUserDetails)
                         ((UsernamePasswordAuthenticationToken) principal)
                                 .getPrincipal()).getUser();
         model.addAttribute("myuser", myuser);
-        return "secure";
+        return "profile";
     }
 
     /* Addition for separate log out page */
-    @RequestMapping("/logoutconfirm")
-    public String logoutconfirm(){
-        return "login";
-    }
+//    @RequestMapping("/logoutconfirm")
+//    public String logoutconfirm(){
+//        return "login";
+//    }
 
 
 }

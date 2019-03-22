@@ -11,33 +11,32 @@
 
     <!-- Database-->
     <div class="container">
-        <table>
+        <h2 class="text-center">Messages</h2>
+        <table class="table table-borderless table-hover">
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Content</th>
+                    <th>Posted By</th>
+                    <!-- Add a picture of the person here-->
                     <th>Posted Date</th>
-                    <th>Posted By</th> <!-- Add a picture of the person here-->
-                    <th>Picture</th>
-                    <th>Actions</th>
+                    <!--<th>Actions</th>-->
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="message : ${messages}">
                     <td th:text="${message.title}"></td>
-                    <td th:text="${message.content}"></td>
-                    <td th:text="${message.postedDate}"></td>
-                    <td th:text="${message.postedBy}"></td>
                     <td>
                         <img th:src="${message.messagePic == null}?'':${message.messagePic}" />
+                        <span th:text="${message.postedBy}"></span>
                     </td>
+                    <td th:text="${message.postedDate}"></td>
                     <td>
                         <!-- Anyone can see Details -->
-                        <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
+                        <a class="btn btn-warning" th:href="@{/detail/{id}(id=${message.id})}">Details</a>
                         <!-- Only the user that made the post can update -->
-                        <span th:if="${user.id == message.user.id}">
-                            <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
-                            <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                        <span th:if="${user_id == message.user.id}">
+                            <a class="btn btn-warning" th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                            <a class="btn btn-dangerous" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
                         </span>
                     </td>
                 </tr>

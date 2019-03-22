@@ -2,23 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Title</title>
+    <title>User Page</title>
     <th:block th:replace="~{base :: header}"></th:block>
 
 </head>
 <body>
+
     <!-- Nav Bar -->
     <div th:replace="base :: nav"></div>
 
-    <!-- Main Content -->
-    h1: user full name
-    container:
-        display user name
-        display user email
-        display user pic
+    <div class="container-fluid">
+        <h2 th:text="${myuser.firstName}"></h2> <h2 th:text="${myuser.lastName}"></h2>
+        <p></p>
+
+        <a class="btn btn-success" th:href="#">Follow</a>
+
+        <!-- Card: username and email on separate line on top, pic on bottom -->
+        <div class="card" style="width: 18rem;">
+            <img th:src="${myuser.userpicture}" class="card-img-top">
+            <div class="card-body">
+                <div class="card-text">
+                    <p th:text="${myuser.username}"></p>
+                    <p th:text="${myuser.email}"></p>
+                </div>
+            </div>
+        </div>
 
 
 
+    </div>
 
     <!-- Footer -->
     <div th:replace="base :: footer"></div>

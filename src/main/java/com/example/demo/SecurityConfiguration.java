@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(
                         new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/logoutconfirm").permitAll() // if logout is successful it'll take us back to logout page.
+                .logoutSuccessUrl("/login").permitAll() // if logout is successful it'll take us back to logout page.
 
 
                 .and()
@@ -76,23 +76,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsServiceBean())
                 .passwordEncoder(passwordEncoder());
 
-//        auth.inMemoryAuthentication()
-//                .withUser("user")
-//                .password(passwordEncoder().encode("password"))
-//                .authorities("USER")
-//
-//                .and()
-//                // add another user
-//                .withUser("user2")
-//                .password(passwordEncoder().encode("password2"))
-//                .authorities("USER")
-//                // .authorities() defines the access type
-//
-//                .and()
-//                // add admin
-//                .withUser("admin")
-//                .password(passwordEncoder().encode("masterpassword"))
-//                .authorities("ADMIN");
 
     }
 }

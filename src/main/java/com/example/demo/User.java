@@ -31,6 +31,9 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "userpicture")
+    private String userpicture;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -38,10 +41,10 @@ public class User {
 
     public User(){ }
 
+
     /* Anytime we create an overloaded constructor we need to have a default no-arg constructor.
      *
       * Also, a java bean must have private variables, no-arg constructor, and getters and setters. */
-
     public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
         this.setEmail(email);
         this.setPassword(password);
@@ -115,5 +118,13 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUserpicture() {
+        return userpicture;
+    }
+
+    public void setUserpicture(String userpicture) {
+        this.userpicture = userpicture;
     }
 }

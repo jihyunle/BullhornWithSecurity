@@ -4,23 +4,41 @@
       xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Title</title>
+
     <th:block th:fragment="header">
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+        <!-- Google Font for NavBar left -->
+        <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+        <!-- My Custom CSS -->
+        <link rel="stylesheet" href="style.css">
     </th:block>
 </head>
+<style>
+    .navbar-brand {
+        font-family: 'Monoton', cursive;
+    }
+</style>
 <body>
     <!-- Navigation -->
     <div th:fragment="nav">
         <nav class="navbar navbar navbar-expand-md navbar-light bg-light sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Bullhorn</a>
+                <a class="navbar-brand" href="/">
+                    <img src="https://res.cloudinary.com/jihyunle/image/upload/v1553276770/depositphotos_183403816-stock-illustration-omg-comic-speech-bubble-heart.jpg"
+                         alt=""> Bullhorn
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <!-- Links -->
-
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
                         <!-- isAuthenticated() means you're logged in -->
                         <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,8 +52,11 @@
                                 <a class="dropdown-item" href="#">People I Follow</a>
                             </div>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home</a>
+                        <li class="nav-item" sec:authorize="hasAuthority('USER')">
+                            <a class="nav-link" href="/add">Add New Message</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="/logout">Logout</a>
                         </li>
                         <!-- !isAuthenticated() means you're NOT logged in-->
                         <li class="nav-item" sec:authorize="!isAuthenticated()">
@@ -43,12 +64,6 @@
                         </li>
                         <li class="nav-item" sec:authorize="!isAuthenticated()">
                             <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="hasAuthority('USER')">
-                            <a class="nav-link" href="/add">Add New Message</a>
-                        </li>
-                        <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <a class="nav-link" href="/logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -59,7 +74,7 @@
     <!-- Footer -->
     <footer class="footer fixed-bottom" th:fragment="footer">
         <div class="container" style="text-align: center" >
-            <p>&copy; Copyright 2019</p>
+            <p>&copy; Copyright 2019 Jen Lee</p>
         </div>
     </footer>
 
