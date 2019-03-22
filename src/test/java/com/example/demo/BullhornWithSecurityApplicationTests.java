@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBoot401RerunApplicationTests {
+public class BullhornWithSecurityApplicationTests {
 
     @Test
     public void contextLoads() {
