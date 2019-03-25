@@ -27,6 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+//    @Bean
+//    public PasswordEncoder encoder(){
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Autowired
     private SSUserDetailsService userDetailsService;
 
@@ -44,7 +49,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Restricts access to routes
         http
                 .authorizeRequests()
-                .antMatchers("/", "/h2-console/**", "/register", "/logoutconfirm").permitAll()
+                .antMatchers("/", "/h2-console/**", "/register", "/logoutconfirm")
+                .permitAll()
                 .anyRequest().authenticated()
                 // ^ any request that is authenticated should be permitted
 
