@@ -2,8 +2,14 @@
 
 /* It was possiblt to have both DataLoader class and PostConstruct */
 
-package com.example.demo;
+package com.example.demo.services;
 
+import com.example.demo.repositories.MessageRepository;
+import com.example.demo.repositories.RoleRepository;
+import com.example.demo.repositories.UserRepository;
+import com.example.demo.models.Message;
+import com.example.demo.models.Role;
+import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;

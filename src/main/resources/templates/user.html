@@ -1,42 +1,40 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org"-->
-      <!--xmlns:sec="www.thymeleaf.org/extras/spring-security">-->
-<!--<head>-->
-    <!--<title>User Page</title>-->
-    <!--<th:block th:replace="~{base :: header}"></th:block>-->
+<!-- Message Details-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>User Details</title>
+    <th:block th:replace="~{base :: header}"></th:block>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="main.css">
 
-<!--</head>-->
-<!--<body>-->
+</head>
+<body>
 
-    <!--&lt;!&ndash; Nav Bar &ndash;&gt;-->
-    <!--<div th:replace="base :: nav"></div>-->
-    <!---->
-    <!--<div class="container-fluid">-->
-        <!--<h2 th:text="${myuser.first_name}"></h2>-->
-        <!--<p></p>-->
+<div th:insert="~{base :: nav}"></div>
 
-        <!--<a class="btn btn-success" th:href="#">Follow</a>-->
+<div class="container-fluid">
+    <p><h3>User Details</h3></p>
+    <div class="text-left">
+        <strong>Use :</strong><span th:text="${message.title}"></span><br />
+        <strong>Content :</strong><br /><span th:text="${message.content}"></span><br />
+        <strong>Posted Date :</strong><span th:text="${#dates.format(message.postedDate, 'MM-dd-YY')}"></span><br />
+        <strong>Posted By :</strong><span th:text="${message.postedBy}"></span><br />
+        <strong>Picture :</strong>
+        <img th:src="${message.messagePic}" alt="message pic" /><br />
 
-        <!--&lt;!&ndash; Card: username and email on separate line on top, pic on bottom &ndash;&gt;-->
-        <!--<div class="card" style="width: 18rem;">-->
-            <!--<img src="https://res.cloudinary.com/jihyunle/image/upload/v1553281089/btvif.jpg"-->
-                 <!--style="width: auto" height="auto" class="card-img-bottom" alt="...">-->
-            <!--<div class="card-body">-->
-                <!--<div class="card-text">-->
-                    <!--<p th:text="${myuser.username}"></p>-->
-                    <!--<p th:text="${myuser.email}"></p>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <a th:href="@{/delete/{id}(id=${message.id})}">Delete this message</a><p></p>
+
+    </div>
+</div>
 
 
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- JS Links -->
+<div th:replace="base :: jslinks"></div>
 
-    <!--</div>-->
-
-    <!--&lt;!&ndash; Footer &ndash;&gt;-->
-    <!--<div th:replace="base :: footer"></div>-->
-    <!--&lt;!&ndash; JS Links &ndash;&gt;-->
-    <!--<div th:replace="base :: jslinks"></div>-->
-
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>

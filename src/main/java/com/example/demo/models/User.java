@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.models;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -51,7 +51,8 @@ public class User implements Serializable {
 
 
     // BONUS addition for adding followers
-    /*
+    /*2
+    option 1
     * https://gist.github.com/ffbit/3343910
     * */
     private Set<User> followers;

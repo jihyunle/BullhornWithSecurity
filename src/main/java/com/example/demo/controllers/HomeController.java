@@ -1,6 +1,10 @@
-package com.example.demo;
+package com.example.demo.controllers;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.example.demo.CloudinaryConfig;
+import com.example.demo.models.Message;
+import com.example.demo.repositories.MessageRepository;
+import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
