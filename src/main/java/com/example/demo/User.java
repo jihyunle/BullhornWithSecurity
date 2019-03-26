@@ -3,12 +3,18 @@ package com.example.demo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="User_Data")
-public class User {
+@Access(AccessType.PROPERTY)
+@Table(schema = "TEST", name="USER_DATA")
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +49,17 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public Set<Message> messages;
 
+
+    // BONUS addition for adding followers
+    /*
+    * https://gist.github.com/ffbit/3343910
+    * */
+    private Set<User> followers;
+
+    private Set<User> following;
+
+
+    // constructor
     public User(){ }
 
 
@@ -56,6 +73,9 @@ public class User {
         this.setLastName(lastName);
         this.setEnabled(enabled);
         this.setUsername(username);
+
+        this.followers = new HashSet<User>();
+        this.followers = new HashSet<User>();
     }
 
     public long getId() {
@@ -139,4 +159,84 @@ public class User {
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
+
+    // BONUS addition for adding followers
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(schema = "TEST", name = "USER_RELATIONS",
+    joinColumns = @JoinColumn(name = "FOLLOWED_ID"),
+    inverseJoinColumns = @JoinColumn(name = "FOLLOWER_ID"))
+    public Set<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<User> followers) {
+        this.followers = followers;
+    }
+
+    public void addFollower(User follower) {
+        followers.add(follower);
+        follower.following.add(this); // don't understand this part
+    }
+
+    @ManyToMany(mappedBy = "followers")
+    public Set<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<User> following) {
+        this.following = following;
+    }
+
+    public void addFollowing(User followed) {
+        followed.addFollower(this);
+    }
+
+    // option 2 for adding followers.
+    /*
+    * https://www.programcreek.com/2014/08/leetcode-design-twitter-java/
+    * */
+    // the following section is stand-alone
+    HashMap<Integer, HashSet<Integer>> userMap; // user & followees
+
+    // follower follows a followee. if the op is invalid it should be a no-op
+    public void follow(int followerId, int followeeId){
+        HashSet<Integer> set = userMap.get(followerId);
+        if (set==null){
+            set = new HashSet<Integer>();
+            userMap.put(followerId, set);
+        }
+        set.add(followeeId);
+    }
+
+    // follower unfollows a followee. if the op is invalid it should be a no-op
+    public void unfollow(int followerId, int followeeId){
+        if (followerId==followeeId){
+            return ;
+        }
+        HashSet<Integer> set = userMap.get(followerId);
+        if (set==null){
+            return ;
+        }
+        set.remove(followeeId);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
