@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -12,13 +12,18 @@ import java.util.Set;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(schema = "TEST", name="USER_DATA")
-public class User implements Serializable {
+//@Table(name="USER")
+public class User
+        implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "ID", unique = true, nullable = false) // w/o this gives error: No identifier specified for entity: com.example.demo.User
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -46,7 +51,10 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.EAGER)
     public Set<Message> messages;
 
 

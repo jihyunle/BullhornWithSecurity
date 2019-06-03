@@ -1,11 +1,11 @@
-package com.example.demo.repositories;
+package com.example.demo;
 
-import com.example.demo.models.User;
+import com.example.demo.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByUsername(String username);
     User findByEmail(String email);
     Long countByEmail(String email);
-    Long countByUsername(String username);
+//    Long countByUsername(String username);
 }

@@ -1,6 +1,6 @@
-package com.example.demo.repositories;
+package com.example.demo;
 
-import com.example.demo.models.Role;
+import com.example.demo.Role;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RoleRepository extends CrudRepository<Role, Long> {

@@ -1,6 +1,6 @@
-package com.example.demo.repositories;
+package com.example.demo;
 
-import com.example.demo.models.Message;
+import com.example.demo.Message;
 import org.springframework.data.repository.CrudRepository;
 
 public interface MessageRepository extends CrudRepository<Message, Long> {

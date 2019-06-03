@@ -1,8 +1,5 @@
-package com.example.demo.controllers;
+package com.example.demo;
 
-import com.example.demo.services.CustomUserDetails;
-import com.example.demo.models.User;
-import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
@@ -46,12 +43,12 @@ public class SecurityController {
 
 
 
-    /* ATTN Dave or Melisssa -- 
+    /* ATTN Dave or Melissa --
     *
-    * Right now when I log in, I am logged in but it first immeidately takes me to
+    * Right now when I log in, I am logged in but it first immediately takes me to
     * path "/style.css"
     *
-    * You have to refirectly manually to
+    * You have to redirect manually to
     * path "/"
     * and it will work fine.
     * */
